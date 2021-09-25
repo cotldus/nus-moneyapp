@@ -19,12 +19,12 @@ const login = document.getElementById("login");
 
 
 const TransactionDataAll = [
-   { id: 1, customername: 'Flora', bank: 'DBS', income: 3000, expense: 2000 },
-   { id: 2, customername: 'Flora', bank: 'OCBC', income: 4000, expense: 2000 },
-   { id: 3, customername: 'Mikhil', bank: 'DBS', income: 3000, expense: 2000 },
-   { id: 4, customername: 'Sashil', bank: 'UOB', income: 6000, expense: 1000 },
-   { id: 5, customername: 'Jack', bank: 'UOB', income: 6000, expense: 8000 },
-   { id: 6, customername: 'Jill', bank: 'UOB', income: 7000, expense: 4000 },
+   { id: 1, customername: 'Flora', merchantName: 'Sushi Tei', income: 3000, expense: 2000 },
+   { id: 2, customername: 'Flora', merchantName: 'Flower Shop', income: 4000, expense: 2000 },
+   { id: 3, customername: 'Mikhil', merchantName: 'Grab', income: 3000, expense: 2000 },
+   { id: 4, customername: 'Sashil', merchantName: 'SGH', income: 6000, expense: 1000 },
+   { id: 5, customername: 'Jack', merchantName: 'Lazada', income: 6000, expense: 8000 },
+   { id: 6, customername: 'Jill', merchantName: 'Fairprice', income: 7000, expense: 4000 },
 
   ];
 
@@ -44,11 +44,16 @@ function addTransactionDOM(transaction) {
   const income_item = document.createElement('li');
 
   income_item.classList.add('plus');
-  income_item.innerHTML = `
-  ${transaction.customername}-${transaction.bank}  <span> $ ${Math.abs(
+  income_item.innerHTML = `${transaction.merchantName}  <span> $ ${Math.abs(
     transaction.income  
-  )}</span> 
+  )}</span><button class="delete-btn">x</button> 
   `;
+
+  // `
+  // ${transaction.customername}-${transaction.merchantName}  <span> $ ${Math.abs(
+  //   transaction.income  
+  // )}</span><button class="delete-btn">x</button> 
+  // `;
   // Flora - DBS <span>$3000</span>
   
 
@@ -57,11 +62,17 @@ function addTransactionDOM(transaction) {
   const expense_item = document.createElement('li');
 
   expense_item.classList.add('minus');
-  expense_item.innerHTML = `
-  ${transaction.customername}-${transaction.bank} <span> -$ ${Math.abs(
+  expense_item.innerHTML =`
+  ${transaction.merchantName} <span> -$ ${Math.abs(
     transaction.expense  
-  )}</span> 
+  )}</span><button class="delete-btn">x</button> 
   `;
+  
+  // `
+  // ${transaction.customername}-${transaction.merchantName} <span> -$ ${Math.abs(
+  //   transaction.expense  
+  // )}</span><button class="delete-btn">x</button> 
+  // `;
 
   list.appendChild(expense_item);
 }
