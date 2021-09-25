@@ -1,6 +1,6 @@
 const balance = document.getElementById('balance');
-const money_plus = document.getElementById('deposit');
-const money_minus = document.getElementById('loan');
+const money_plus = document.getElementById('income');
+const money_minus = document.getElementById('expense');
 const list = document.getElementById('list');
 
 const form = document.getElementById('form');
@@ -19,12 +19,12 @@ const login = document.getElementById("login");
 
 
 const TransactionDataAll = [
-   { id: 1, customername: 'Flora', bank: 'DBS', deposit: 3000, loan: 2000 },
-   { id: 2, customername: 'Flora', bank: 'OCBC', deposit: 4000, loan: 2000 },
-   { id: 3, customername: 'Mikhil', bank: 'DBS', deposit: 3000, loan: 2000 },
-   { id: 4, customername: 'Sashil', bank: 'UOB', deposit: 6000, loan: 1000 },
-   { id: 5, customername: 'Jack', bank: 'UOB', deposit: 6000, loan: 8000 },
-   { id: 6, customername: 'Jill', bank: 'UOB', deposit: 7000, loan: 4000 },
+   { id: 1, customername: 'Flora', bank: 'DBS', income: 3000, expense: 2000 },
+   { id: 2, customername: 'Flora', bank: 'OCBC', income: 4000, expense: 2000 },
+   { id: 3, customername: 'Mikhil', bank: 'DBS', income: 3000, expense: 2000 },
+   { id: 4, customername: 'Sashil', bank: 'UOB', income: 6000, expense: 1000 },
+   { id: 5, customername: 'Jack', bank: 'UOB', income: 6000, expense: 8000 },
+   { id: 6, customername: 'Jill', bank: 'UOB', income: 7000, expense: 4000 },
 
   ];
 
@@ -39,31 +39,31 @@ const LoginDataAll = [
 
  var TransactionData = null;
 
-// Add transactions to DOM list (show deposit-loan)
+// Add transactions to DOM list (show income-expense)
 function addTransactionDOM(transaction) {
-  const deposit_item = document.createElement('li');
+  const income_item = document.createElement('li');
 
-  deposit_item.classList.add('plus');
-  deposit_item.innerHTML = `
+  income_item.classList.add('plus');
+  income_item.innerHTML = `
   ${transaction.customername}-${transaction.bank}  <span> $ ${Math.abs(
-    transaction.deposit  
+    transaction.income  
   )}</span> 
   `;
   // Flora - DBS <span>$3000</span>
   
 
-  list.appendChild(deposit_item);
+  list.appendChild(income_item);
 
-  const loan_item = document.createElement('li');
+  const expense_item = document.createElement('li');
 
-  loan_item.classList.add('minus');
-  loan_item.innerHTML = `
+  expense_item.classList.add('minus');
+  expense_item.innerHTML = `
   ${transaction.customername}-${transaction.bank} <span> -$ ${Math.abs(
-    transaction.loan  
+    transaction.expense  
   )}</span> 
   `;
 
-  list.appendChild(loan_item);
+  list.appendChild(expense_item);
 }
 
 // add login history
@@ -82,16 +82,16 @@ function addAccessLogs(custname) {
 }
 
 
-// Update the balance, deposit and loan
+// Update the balance, income and expense
 function updateValues() {
-  const deposits = TransactionData.map(transaction => transaction.deposit);
-  const loans = TransactionData.map(transaction => transaction.loan);
-  const total_deposit = deposits.reduce((acc, item) => (acc += item), 0).toFixed(2);
-  const total_loan = loans.reduce((acc, item) => (acc += item), 0).toFixed(2);
-  const bal = total_deposit - total_loan;
+  const allIncome = TransactionData.map(transaction => transaction.income);
+  const expenses = TransactionData.map(transaction => transaction.expense);
+  const total_income = allIncome.reduce((acc, item) => (acc += item), 0).toFixed(2);
+  const total_expense = expenses.reduce((acc, item) => (acc += item), 0).toFixed(2);
+  const bal = total_income - total_expense;
   balance.innerText = `$${bal}`;
-  money_plus.innerText = `$${total_deposit}`;
-  money_minus.innerText = `$${total_loan}`;
+  money_plus.innerText = `$${total_income}`;
+  money_minus.innerText = `$${total_expense}`;
   reco.innerText = (bal >= 0)? "You Have Sound Financial Health": "Your Financial Health is Weak";
 
 // Draw pie chart
@@ -110,7 +110,7 @@ function updateValues() {
     .attr("height", height)
     .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-    var data = {Deposits: total_deposit, Loans: total_loan}
+    var data = {Income: total_income, Expenses: total_expense}
     
     // set the color scale
     var color = d3.scaleOrdinal()
