@@ -47,7 +47,7 @@ function addTransactionDOM(transaction) {
   income_item.innerHTML = `
   ${transaction.customername}-${transaction.bank}  <span> $ ${Math.abs(
     transaction.income  
-  )}</span> 
+  )}</span><button class="delete-btn">x</button> 
   `;
   // Flora - DBS <span>$3000</span>
   
@@ -60,7 +60,7 @@ function addTransactionDOM(transaction) {
   expense_item.innerHTML = `
   ${transaction.customername}-${transaction.bank} <span> -$ ${Math.abs(
     transaction.expense  
-  )}</span> 
+  )}</span><button class="delete-btn">x</button> 
   `;
 
   list.appendChild(expense_item);
