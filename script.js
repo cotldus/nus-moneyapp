@@ -204,7 +204,6 @@ function updateValues() {
   // if master, show all transactions
     if (custname.value.toUpperCase() == 'MASTER' && custpwd.value == 'masterkey') {
       showAuthorized()
-      console.log("run")
       document.getElementById("my_dataviz").innerHTML = '';
       list.innerHTML = '';
       reco.innerHTML = '';
