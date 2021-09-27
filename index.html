@@ -55,7 +55,7 @@
       <div id="card" style="display: none" class="wrapper wrapper--w680">
           <div class="card card-4">
               <div class="card-body">
-                  <form method="POST">
+                  <form method="POST" id="myform">
                       <div class="row row-space">
                           <div class="col-5">
                               <div class="input-group">
@@ -93,11 +93,11 @@
                               <label class="label">Type of Transaction</label>
                               <div class="p-t-10">
                                   <label class="radio-container m-r-45">Income
-                                      <input type="radio" checked="checked" name="gender"> <!--change-->
+                                      <input id="income" type="radio" checked="checked" name="gender"> <!--change-->
                                       <span class="checkmark"></span>
                                   </label>
                                   <label class="radio-container">Expense
-                                      <input type="radio" name="gender"> <!--change-->
+                                      <input id="expense" type="radio" name="gender"> <!--change-->
                                       <span class="checkmark"></span>
                                   </label>
                               </div>
@@ -105,6 +105,9 @@
                       </div>
                       </div>
                       <div class="p-t-15">
+                        <p id="frmError" style="display: none">
+                          Please fill in all fields!
+                        </p>
                           <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
                       </div>
                   </form>
@@ -151,6 +154,7 @@
 
     <script src="script.js"></script>
     <script src="global.js"></script>
+    <script src="postdata.js"></script>
 
     
   </body>
