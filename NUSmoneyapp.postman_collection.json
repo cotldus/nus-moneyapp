@@ -1,0 +1,118 @@
+{
+	"variables": [],
+	"info": {
+		"name": "NUSmoneyapp",
+		"_postman_id": "6bdcb800-8dc9-13ff-4d8d-068f3f3068fc",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getTransactionsByUID",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/transactions/by-uid?user_id=61503e85fc13ae62f5000041",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"transactions",
+						"by-uid"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "61503e85fc13ae62f5000041",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"Shanna\",\n    \"last_name\": \"C\",\n    \"email\": \"shannac0@indiegogo.com\",\n    \"phone\": \"68436413684\",\n    \"plan_id\": 1\n}\n\n"
+				},
+				"description": "getTransactionsByUID"
+			},
+			"response": []
+		},
+		{
+			"name": "addTransaction",
+			"request": {
+				"url": "http://localhost:3000/transactions/add",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"transaction_type\": \"credit\",\n        \"user_id\": \"61503e85fc13ae62f5000041\",\n        \"transaction_title\": \"Games\",\n        \"amount\": 24.27\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getUserByUID",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/user/by-uid?user_id=61503e85fc13ae62f5000041",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						"by-uid"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "61503e85fc13ae62f5000041",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "select * from Users where user_id = '${request.query.user_id}'"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllUsers",
+			"request": {
+				"url": "http://localhost:3000/user/all",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "getAllUsers"
+			},
+			"response": []
+		}
+	]
+}
