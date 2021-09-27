@@ -2,6 +2,7 @@ const balance = document.getElementById('balance');
 const money_plus = document.getElementById('income');
 const money_minus = document.getElementById('expense');
 const list = document.getElementById('list');
+const hello = document.getElementById('hello')
 
 const form = document.getElementById('form');
 const custname = document.getElementById('custname');
@@ -188,10 +189,11 @@ function updateValues() {
 
   }
 
-  function showAuthorized() {
+  function showAuthorized(user) {
     authorization.style.display = "block"
     logout.style.display = "block"
     login.style.display = "none"
+    hello.innerHTML = `Hello ${user}!`;
   }
   function loginRequired() {
     authorization.style.display = "none"
@@ -204,7 +206,7 @@ function updateValues() {
 
   // if master, show all transactions
     if (custname.value.toUpperCase() == 'MASTER' && custpwd.value == 'masterkey') {
-      showAuthorized()
+      showAuthorized('Master')
       document.getElementById("my_dataviz").innerHTML = '';
       list.innerHTML = '';
       reco.innerHTML = '';
@@ -221,7 +223,7 @@ function updateValues() {
         }
         // if customer found and password correct, filter transaction for user
         else if ( custpwd.value == LoginCust[0].pwd) {
-          showAuthorized()
+          showAuthorized(LoginCust[0].customername)
           filterTransaction();
         } else {
           reco.innerText = 'Invalid credentials!'
