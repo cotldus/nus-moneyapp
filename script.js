@@ -15,6 +15,7 @@ const loginList = document.getElementById('loginList');
 const authorization = document.getElementById("authorization");
 const logout = document.getElementById("logout");
 const login = document.getElementById("login");
+const card = document.getElementById("card");
 
 
 
@@ -234,6 +235,13 @@ function updateValues() {
   filterTransaction();
 } */
 
+function addTransaction() {
+  if (card.style.display === "none") {
+    card.style.display = "block";
+  } else {
+    card.style.display = "none";
+  }
+}
 
 //form.addEventListener('submit', filterTransaction);
 b1.addEventListener('click',grantPermission);
