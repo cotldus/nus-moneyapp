@@ -1,5 +1,5 @@
-// There is an error in this file, ajax unable to send data to server
-/*Syntax: */
+// // There is an error in this file, ajax unable to send data to server
+// /*Syntax: */
 frm = document.getElementById("myform");
 const frmError = document.getElementById('frmError');
 
@@ -28,6 +28,7 @@ function postToServer(e){
   postDataJSON = JSON.stringify(postData);
   console.log(postDataJSON);
   addData(postDataJSON);
+  init();
 }  
 
 //url: "https://varlabs.comp.nus.edu.sg/fintech/itemsapi.php"
