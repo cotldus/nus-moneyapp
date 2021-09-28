@@ -38,12 +38,12 @@ function getUserByName(){
     return myuserdata
     }
   });
-  console.log(myuserdata[0]);
   return myuserdata;
 };
 
-const getTransactionData = (e) => {
-  e.preventDefault();
+const getTransactionData = () => {
+  // e.preventDefault();
+  console.log(myuserdata[0].user_id);
   let querryStr = "http://localhost:3000/transactions/by-uid?user_id=" + myuserdata[0].user_id;
   // $.getJSON(querryStr, mydata);
   $.ajax({
@@ -51,7 +51,7 @@ const getTransactionData = (e) => {
     dataType: 'json',
     async: false,
     success: function(data) {
-    myuserdata = data;
+    mytransactiondata = data;
     return mytransactiondata
     }
   });
@@ -189,7 +189,8 @@ function filterTransaction(e) {
   document.getElementById("my_dataviz").innerHTML = "";
   list.innerHTML = "";
   reco.innerHTML = "";
-  TransactionData = getTransactionData
+  getTransactionData();
+  TransactionData = mytransactiondata;
   TransactionData.forEach(addTransactionDOM);
   // addAccessLogs(custname.value.toUpperCase());
   updateValues();
