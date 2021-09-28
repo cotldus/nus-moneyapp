@@ -61,7 +61,7 @@ const getTransactionData = () => {
 
 
 
-TransactionData = null;
+let TransactionData = null;
 
 // Add transactions to DOM list (show income-expense)
 function addTransactionDOM(transaction) {
@@ -81,8 +81,8 @@ function addTransactionDOM(transaction) {
 
     expense_item.classList.add("minus");
     expense_item.innerHTML = `
-    ${transaction.merchantName} <span> -$ ${Math.abs(
-      transaction.expense
+    ${transaction.transaction_title} <span> -$ ${Math.abs(
+      transaction.amount
     )}</span><button class="delete-btn">x</button> 
     `;
   
@@ -93,16 +93,17 @@ function addTransactionDOM(transaction) {
 
 // Update the balance, income and expense
 function updateValues() {
-  const allIncome = income_items.map((transaction) => { if (transaction.transaction_type === "credit") return transaction});
-  const expenses = expense_items.map((transaction) => { if (transaction.transaction_type === "debit") return transaction});
-  const total_income = allIncome
-    .reduce((acc, item) => (acc += item), 0)
-    .toFixed(2);
-  const total_expense = expenses
-    .reduce((acc, item) => (acc += item), 0)
-    .toFixed(2);
+  let total_income = 0
+  let total_expense = 0
+  TransactionData.forEach((transaction) => { if (transaction.transaction_type === "credit") {total_income += transaction.amount}else {total_expense += transaction.amount}});
+  // const total_income = allIncome
+  //   .reduce((acc, item) => (acc += item), 0)
+  //   .toFixed(2);
+  // const total_expense = expenses
+  //   .reduce((acc, item) => (acc += item), 0)
+  //   .toFixed(2);
   const bal = total_income - total_expense;
-  balance.innerText = `$${bal}`;
+  balance.innerText = `$${bal.toFixed(2)}`;
   money_plus.innerText = `$${total_income}`;
   money_minus.innerText = `$${total_expense}`;
   reco.innerText =
