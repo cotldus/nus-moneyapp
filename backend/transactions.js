@@ -66,5 +66,24 @@ router.post("/transactions/add", (request, response) => {
   );
 });
 
+//http://localhost:3000/transactions/delete/by-tid?transaction_id=1
+router.delete("/transactions/delete/by-tid", (request, response) => {
+  let tid = request.query.transaction_id;
+
+  console.log(tid)
+
+  database.connection.query(
+    `delete from Transactions where transaction_id='${tid}'`,
+    (errors) => {
+      if (errors) {
+        console.log(errors);
+        response.status(500).send("Some error occurred at the backend");
+      } else {
+        response.status(200).send("Transaction Deleted!");
+      }
+    }
+  );
+});
+
 
 module.exports = { router };

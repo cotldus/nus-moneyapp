@@ -1,10 +1,10 @@
 // There is an error in this file, ajax unable to send data to server
 /*Syntax: */
 frm = document.getElementById("myform");
-const income = document.getElementById('income');
-const expense = document.getElementById('expense');
-const transaction_title = document.getElementById('merchantName');
-const amount = document.getElementById('amount');
+const income = $("#income").is(":checked");
+const expense = $("#expense").is(":checked");
+const transaction_title = document.getElementById('merchantName').value;
+const amount = document.getElementById('amount').value;
 const frmError = document.getElementById('frmError');
 
 function postToServer(e){
@@ -14,10 +14,10 @@ function postToServer(e){
     return
   }
   postData = { 
-    transaction_type: (income.value ? "credit" : "debit"),
-    user_id: uid.value,  
-    transaction_title: transaction_title.value,
-    amount: amount.value,
+    transaction_type: (income ? "credit" : "debit"),
+    user_id: user_id,  
+    transaction_title: transaction_title,
+    amount: amount,
   };
 
   console.log(postData);

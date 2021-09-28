@@ -16,6 +16,7 @@ const authorization = document.getElementById("authorization");
 const logout = document.getElementById("logout");
 const login = document.getElementById("login");
 const card = document.getElementById("card");
+let user_id= ""
 
 // function getUserByUID(){
 //   let querryStr = "http://localhost:3000/user/by-uid?user_id=" + uid.value;
@@ -59,6 +60,27 @@ const getTransactionData = () => {
   return mytransactiondata;
 };
 
+const deleteTransactionByTID = (tid) => {
+  let querryStr = "http://localhost:3000/delete/transactions/by-tid?transaction_id=" + tid;
+
+  $.ajax({
+    url: querryStr,
+    type: 'DELETE',
+    dataType: 'json',
+    async: false,
+    success: function() {
+    console.log("Delete request was successful")
+    },
+    error: function (jqXhr, textStatus, errorMessage) {
+      console.log(errorMessage)
+    }
+  });
+}
+
+const deleteTransaction = (tid) => {
+  deleteTransaction(tid);
+  document.getElementById(tid).outerHTML=""
+}
 
 
 let TransactionData = null;
@@ -69,16 +91,17 @@ function addTransactionDOM(transaction) {
   if (transaction.transaction_type === "credit") {
     const income_item = document.createElement("li");
     income_item.classList.add("plus");
+    income_item.setAttribute("id", transaction.transaction_id)
     income_item.innerHTML = `${transaction.transaction_title}  <span> $ ${Math.abs(
       transaction.amount
-    )}</span><button class="delete-btn">x</button> 
+    )}</span><button class="delete-btn" id=${transaction.transaction_id}>x</button> 
     `;
   
     list.appendChild(income_item);
   }
   if (transaction.transaction_type === "debit") {
     const expense_item = document.createElement("li");
-
+    expense_item.setAttribute("id", transaction.transaction_id)
     expense_item.classList.add("minus");
     expense_item.innerHTML = `
     ${transaction.transaction_title} <span> -$ ${Math.abs(
@@ -195,6 +218,13 @@ function filterTransaction(e) {
   TransactionData.forEach(addTransactionDOM);
   // addAccessLogs(custname.value.toUpperCase());
   updateValues();
+
+  let deleteButtons = document.getElementsByClassName("delete-btn");
+
+  Array.from(deleteButtons).forEach((button) => {
+    let tid = button.getAttribute("id")
+    button.addEventListener('click', deleteTransaction(tid), {once: true});
+  });
 }
 
 function showAuthorized(user) {
@@ -213,7 +243,7 @@ function grantPermission(e) {
   e.preventDefault(); //to prevent form from submitting and refreshing the page
   getUserByName();
   console.log(myuserdata[0].user_id);
-  const user_id = myuserdata[0].user_id;
+  user_id = myuserdata[0].user_id;
   const username = myuserdata[0].username;
   const password = myuserdata[0].password;
 
