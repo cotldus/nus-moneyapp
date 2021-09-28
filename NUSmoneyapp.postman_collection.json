@@ -113,6 +113,38 @@
 				"description": "getAllUsers"
 			},
 			"response": []
+		},
+		{
+			"name": "deleteTransactionByTID",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/transactions/delete/by-tid?transaction_id=61504ac7fc13ae132b000000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"transactions",
+						"delete",
+						"by-tid"
+					],
+					"query": [
+						{
+							"key": "transaction_id",
+							"value": "61504ac7fc13ae132b000000",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }
