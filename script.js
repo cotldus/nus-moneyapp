@@ -61,7 +61,7 @@ const getTransactionData = () => {
 };
 
 const deleteTransactionByTID = (tid) => {
-  let querryStr = "http://localhost:3000/delete/transactions/by-tid?transaction_id=" + tid;
+  let querryStr = "http://localhost:3000/transactions/delete/by-tid?transaction_id=" + tid;
 
   $.ajax({
     url: querryStr,
@@ -78,8 +78,8 @@ const deleteTransactionByTID = (tid) => {
 }
 
 const deleteTransaction = (tid) => {
-  deleteTransaction(tid);
-  document.getElementById(tid).outerHTML=""
+  deleteTransactionByTID(tid);
+  document.getElementById(`${tid}`).outerHTML=""
 }
 
 
@@ -94,7 +94,7 @@ function addTransactionDOM(transaction) {
     income_item.setAttribute("id", transaction.transaction_id)
     income_item.innerHTML = `${transaction.transaction_title}  <span> $ ${Math.abs(
       transaction.amount
-    )}</span><button class="delete-btn" id=${transaction.transaction_id}>x</button> 
+    )}</span><button class="delete-btn" onclick="deleteTransaction(${transaction.transaction_id})">x</button> 
     `;
   
     list.appendChild(income_item);
@@ -106,7 +106,7 @@ function addTransactionDOM(transaction) {
     expense_item.innerHTML = `
     ${transaction.transaction_title} <span> -$ ${Math.abs(
       transaction.amount
-    )}</span><button class="delete-btn" id=${transaction.transaction_id}>x</button> 
+    )}</span><button class="delete-btn" onclick="deleteTransaction(${transaction.transaction_id})">x</button> 
     `;
   
     list.appendChild(expense_item);
@@ -218,13 +218,6 @@ function filterTransaction(e) {
   TransactionData.forEach(addTransactionDOM);
   // addAccessLogs(custname.value.toUpperCase());
   updateValues();
-
-  let deleteButtons = document.getElementsByClassName("delete-btn");
-
-  Array.from(deleteButtons).forEach((button) => {
-    let tid = button.getAttribute("id")
-    button.addEventListener('click', deleteTransaction(tid), {once: true});
-  });
 }
 
 function showAuthorized(user) {
@@ -272,6 +265,7 @@ function addTransaction() {
     card.style.display = "none";
   }
 }
+
 
 //form.addEventListener('submit', filterTransaction);
 b1.addEventListener("click", grantPermission);
