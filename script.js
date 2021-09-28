@@ -17,16 +17,49 @@ const logout = document.getElementById("logout");
 const login = document.getElementById("login");
 const card = document.getElementById("card");
 
-const getUserByUID = () => {
-  let querryStr = "http://localhost:3000/user/by-uid?user_id=" + uid.value;
-  $.getJSON(querryStr, mydata);
+// function getUserByUID(){
+//   let querryStr = "http://localhost:3000/user/by-uid?user_id=" + uid.value;
+//   $.getJSON(querryStr, function(data){
+//     console.log(data);
+//     return  x = data;
+//   });
+// };
+
+
+function getUserByName(){
+  let querryStr = "http://localhost:3000/user/by-username?username=" + uid.value;
+
+  $.ajax({
+    url: querryStr,
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+    myuserdata = data;
+    return myuserdata
+    }
+  });
+  console.log(myuserdata[0]);
+  return myuserdata;
 };
 
 const getTransactionData = (e) => {
   e.preventDefault();
-  let querryStr = "http://localhost:3000/transactions/by-uid?user_id=" + uid.value;
-  $.getJSON(querryStr, mydata);
+  let querryStr = "http://localhost:3000/transactions/by-uid?user_id=" + myuserdata[0].user_id;
+  // $.getJSON(querryStr, mydata);
+  $.ajax({
+    url: querryStr,
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+    myuserdata = data;
+    return mytransactiondata
+    }
+  });
+  console.log(mytransactiondata[0]);
+  return mytransactiondata;
 };
+
+
 
 TransactionData = null;
 
@@ -176,8 +209,15 @@ function loginRequired() {
 
 function grantPermission(e) {
   e.preventDefault(); //to prevent form from submitting and refreshing the page
+  getUserByName();
+  console.log(myuserdata[0].user_id);
+  const user_id = myuserdata[0].user_id;
+  const username = myuserdata[0].username;
+  const password = myuserdata[0].password;
 
-  const { user_id, username, password } = getUserByUID()
+  
+  
+  // const { user_id, username, password } = getUserByName()
   // if customer not found
   if (!user_id) {
     reco.innerText = "Customer does not exist!";
@@ -204,3 +244,4 @@ function addTransaction() {
 //form.addEventListener('submit', filterTransaction);
 b1.addEventListener("click", grantPermission);
 b2.addEventListener("click", init); //no need to call init. when no event handler it will reload/referesh the page
+
