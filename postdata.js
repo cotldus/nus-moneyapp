@@ -1,15 +1,18 @@
 // There is an error in this file, ajax unable to send data to server
 /*Syntax: */
 frm = document.getElementById("myform");
-const income = $("#income").is(":checked");
-const expense = $("#expense").is(":checked");
-const transaction_title = document.getElementById('merchantName').value;
-const amount = document.getElementById('amount').value;
 const frmError = document.getElementById('frmError');
 
 function postToServer(e){
   e.preventDefault();  //to prevent form from submitting and refreshing the page
-  if ((!income | !expense) && transaction_title && amount) {
+  
+  const income = document.querySelector('input[name="income"]:checked') ? true : false;
+  const expense = document.querySelector('input[name="expense"]:checked') ? true : false;
+  const transaction_title = document.getElementById('merchantName').value;
+  const amount = document.getElementById('amount').value;
+
+  console.log(income, expense, transaction_title, amount)
+  if ((!income && !expense) | !transaction_title | !amount) {
     frmError.style.display = "block";
     return
   }
@@ -41,7 +44,7 @@ function addData(postData){// pass your data in method
              dataType: "text", 
 
              success: function (data, status, jqXHR) {
-               //  alert("success");// write success in " "
+                console.log("Add request was successful")
                  alert(status);
                  document.getElementById("output").innerText = data;
              },

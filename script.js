@@ -56,7 +56,7 @@ const getTransactionData = () => {
     return mytransactiondata
     }
   });
-  console.log(mytransactiondata[0]);
+  // console.log(mytransactiondata[0]);
   return mytransactiondata;
 };
 
@@ -106,7 +106,7 @@ function addTransactionDOM(transaction) {
     expense_item.innerHTML = `
     ${transaction.transaction_title} <span> -$ ${Math.abs(
       transaction.amount
-    )}</span><button class="delete-btn">x</button> 
+    )}</span><button class="delete-btn" id=${transaction.transaction_id}>x</button> 
     `;
   
     list.appendChild(expense_item);
