@@ -1,5 +1,5 @@
 const express = require("express");
-const data = require('./data');
+// const data = require('./data');
 const database = require('./database');
 router = express.Router();
 
@@ -28,6 +28,25 @@ router.get("/user/by-uid", (request,response)=>{
 
   database.connection.query(
     `select * from Users where user_id = '${request.query.user_id}'`,
+    (errors, records) => {
+      if (errors) {
+        console.log(errors);
+        response.status(500).send("An error occurred in the backend");
+      } else {
+        response.status(200).send(records);
+      }
+    }
+  );
+})
+
+//http://localhost:3000/user/by-username?username=Anatole
+router.get("/user/by-username", (request,response)=>{
+  // let user_id = request.query.user_id;
+  // let user = data.get_user_by_user_id(user_id);// get a user based on user_id I get in the request.
+  // response.send(user);
+
+  database.connection.query(
+    `select * from Users where username = '${request.query.username}'`,
     (errors, records) => {
       if (errors) {
         console.log(errors);
