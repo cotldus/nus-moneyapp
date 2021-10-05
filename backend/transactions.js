@@ -67,7 +67,7 @@ router.post("/transactions/add", (request, response) => {
 });
 
 //http://localhost:3000/transactions/delete/by-tid?transaction_id=1
-router.delete("/transactions/delete/by-tid", (request, response) => {
+router.get("/transactions/delete/by-tid", (request, response) => {
   let tid = request.query.transaction_id;
 
   console.log(tid)
