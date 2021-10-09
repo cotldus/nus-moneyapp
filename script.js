@@ -6,11 +6,13 @@ const hello = document.getElementById("hello");
 
 const form = document.getElementById("form");
 const uid = document.getElementById("custname");
+const account_address = document.getElementById("accountAddress");
 const custpwd = document.getElementById("custpwd");
 
 const reco = document.getElementById("reco");
 const b1 = document.getElementById("b1");
 const b2 = document.getElementById("b2");
+const b3 = document.getElementById("b3");
 
 const authorization = document.getElementById("authorization");
 const logout = document.getElementById("logout");
@@ -40,6 +42,29 @@ function getUserByName(){
     }
   });
   return myuserdata;
+};
+
+const getCOTBalance = () => {
+  let COTBalance = 0;
+  let querryStr = `http://localhost:3000/COTBalance?accountAddress=` + account_address.value;
+
+  $.ajax({
+    url: querryStr,
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+      console.log(data)
+      COTBalance = data;
+    return [COTBalance, account_address.value]
+    }
+  });
+  return [COTBalance, account_address.value]
+}
+
+const showCOTBalance = (e) => {
+  e.preventDefault();
+  let [ COTBalance, account_address ] = getCOTBalance();
+  alert(`Balance for user ${account_address} is COT${COTBalance/1000000000000000000}`)
 };
 
 const getTransactionData = () => {
@@ -281,4 +306,5 @@ function addTransaction() {
 //form.addEventListener('submit', filterTransaction);
 b1.addEventListener("click", grantPermission);
 b2.addEventListener("click", init); //no need to call init. when no event handler it will reload/referesh the page
+b3.addEventListener("click", showCOTBalance);
 

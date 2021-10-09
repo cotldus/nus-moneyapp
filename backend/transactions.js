@@ -3,8 +3,22 @@ const express = require("express");
 const database = require('./database');
 router = express.Router();
 const short = require('short-uuid');
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const dotenv = require("dotenv").config();
+
 
 const translator = short(); // Defaults to flickrBase58
+
+
+
+
+http://localhost:3000/COTBalance?accountAddress=1
+router.get('/COTBalance', async (request, response) => {
+  let account_address = request.query.accountAddress
+  let info = await fetch(`https://api-ropsten.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0xcad680287ee517cfae13c6956f035f07294d975d&address=${account_address}&tag=latest&apikey=${process.env.Token_Api}`);
+  const data = await info.json();
+  response.status(200).send(data.result);
+})
 
 //http://localhost:3000/transactions/all
 router.get('/transactions/all', (request, response) => {
