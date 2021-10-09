@@ -6,7 +6,7 @@ const dotenv = require("dotenv").config();
 // Define properties to be used for mysql connection
 const properties = {
   host: `${process.env.DBHOST}`,
-  port: process.env.DBPORT,
+  port: `${process.env.DBPORT}`,
   user: `${process.env.DBUSER}`,
   password: `${process.env.DBPASSWD}`,
   database: `${process.env.DBNAME}`,
