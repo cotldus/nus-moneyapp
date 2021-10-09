@@ -79,7 +79,7 @@ const deleteTransactionByTID = (tid) => {
 const deleteTransaction = (e) => {
   let tid = e.target.id
   deleteTransactionByTID(tid);
-  document.getElementById(`${tid}`).parentNode.remove()
+  filterTransaction();
 
 }
 
