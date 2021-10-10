@@ -153,6 +153,31 @@
       </ul>
     </div> -->
 
+    <div id="metamask">
+      <h2>Metamask</h2>
+      <button class ="btn" id="metamaskButton">Connect to Metamask</button>
+      <p>Your Public Address:</p><br>
+      <p id='showAccount'></p>
+      <br>
+      <br>
+      
+      <label>Input Token Contract Address:</label><br>
+      <input type='text' id="token-address"><br>
+      <input type="submit" onclick="getAddress()">
+      
+      <br>
+      <p>Token address:</p>
+      <p><span id='display'></span></p>
+      <br>
+      <button class ="btn" id="balanceButton">Show Token Balance</button>
+      <p>Your Balance:</p><br>
+      <p><span id='showBalance'></span></p>
+
+    </div>
+
+
+
+
     <script src="script.js"></script>
     <script src="global.js"></script>
     <script src="postdata.js"></script>
