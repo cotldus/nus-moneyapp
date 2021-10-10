@@ -278,6 +278,154 @@ function addTransaction() {
 }
 
 
+/*** 
+Metamask connect 
+***/
+
+
+// Connecting Metamask account and show Wallet Address
+const connectButton = document.querySelector('#metamaskButton');
+const showAccount = document.querySelector('#showAccount');
+
+// Showing balance of ERC-20 Token
+const balanceButton = document.querySelector('#balanceButton');
+const showBalance = document.querySelector('#showBalance');
+
+
+let currentAccount = null;
+
+// Connect to Metamask Button
+connectButton.addEventListener('click', () => {
+  connect();
+});
+
+// User submit Token Address input
+function getAddress() {
+  const tokenAddress = document.getElementById("token-address").value;
+  document.getElementById('display').innerHTML  = tokenAddress;
+  console.log("Token address: " + tokenAddress);
+}
+
+// Show Token Balance button
+balanceButton.addEventListener('click', () => {
+    getBalance(currentAccount);
+    getToken();
+})
+
+
+// Connecting to Metamask Wallet & display wallet address
+
+function detectMetaMask() {
+  if (typeof window.ethereum !== 'undefined') {                
+      return true
+  } else {                
+      return false
+  }
+}
+
+function connect() {
+  console.log('Calling connect()');
+  ethereum
+  .request({ method: 'eth_requestAccounts' })
+  .then(handleAccountsChanged)
+  .catch((err) => {
+  if (err.code === 4001) {
+      // EIP-1193 userRejectedRequest error
+      // If this happens, the user rejected the connection request.
+      console.log('Please connect to MetaMask.');
+      console.log('You refused to connect Metamask');
+  } else {
+      console.error(err);
+  }
+  });
+}
+
+function handleAccountsChanged(accounts) {
+  console.log('Calling HandleChanged');
+
+  if (accounts.length === 0) {
+      console.log('Please connect to MetaMask.');
+      
+  } else if (accounts[0] !== currentAccount) {
+      currentAccount = accounts[0];
+      $('#showAccount').html(currentAccount)
+      
+      if(currentAccount != null) {
+          // Set the button label
+          $('#showAccount').html(currentAccount)
+      }
+  }
+  console.log('WalletAddress in HandleAccountChanged ='+currentAccount)
+}
+
+// Web3
+
+window.addEventListener('load', function () {
+  if (typeof web3 !== 'undefined') {
+      console.log('Web3 Detected! ' + web3.currentProvider.constructor.name)
+      web3 = new Web3(window.ethereum);
+  } else {
+      console.log('No Web3 Detected...')
+  }
+})
+
+// try {            
+//     web3 = new Web3(window.ethereum);
+// } 
+// catch (error) {
+//     console.log(error);
+// }
+
+
+// ABI to get ERC20 Token balance
+
+const minABI = [  
+  // balanceOf
+  {    
+    constant: true,
+
+    inputs: [{ name: "_owner", type: "address" }],
+
+    name: "balanceOf",
+
+    outputs: [{ name: "balance", type: "uint256" }],
+
+    type: "function",
+  },
+];
+
+// Wallet address is stored in currentAccount variable
+// Token address from user input field tokenAddress
+
+// console.log(web3);
+// console.log(web3.eth);
+
+
+async function getBalance(currentAccount) {
+  const tokenAddress = document.getElementById("display").innerText;
+  console.log(tokenAddress);
+  const contract = new web3.eth.Contract(minABI, tokenAddress); 
+  const result = await contract.methods.balanceOf(currentAccount).call(); 
+  // convert wei
+  const tokenAmount = web3.utils.fromWei(result); 
+  console.log(tokenAmount);
+  // const symbol = await contract.methods.symbol().call();
+  // console.log(symbol);
+
+  $('#showBalance').html(tokenAmount)
+}
+
+// .symbol() error?
+async function getToken() {
+  const tokenAddress = document.getElementById("display").innerText;
+  const contract = new web3.eth.Contract(minABI, tokenAddress);
+  tokenSymbol = await contract.methods.symbol().call();
+  console.log("output = " + tokenSymbol);
+}
+
+
+
+
 //form.addEventListener('submit', filterTransaction);
 b1.addEventListener("click", grantPermission);
 b2.addEventListener("click", init); //no need to call init. when no event handler it will reload/referesh the page
