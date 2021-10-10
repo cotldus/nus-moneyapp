@@ -337,6 +337,7 @@ input[type='number'] {
   
   h5 {
     font-size: 15px;
+    word-break: break-all;
   }
   
   h6 {
