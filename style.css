@@ -56,6 +56,17 @@ h4 {
   margin: 20px 0;
 }
 
+p { word-break: break-all }
+
+.metamask-container {
+  background-color: #fff;
+  box-shadow: var(--box-shadow);
+  padding: 20px;
+  display: flex-wrap;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
 .inc-exp-container > div {
   flex: 1;
   text-align: center;
@@ -326,6 +337,7 @@ input[type='number'] {
   
   h5 {
     font-size: 15px;
+    word-break: break-all;
   }
   
   h6 {

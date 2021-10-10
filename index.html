@@ -18,6 +18,8 @@
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/@metamask/legacy-web3@latest/dist/metamask.web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 
     <!-- Color scale -->
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
@@ -49,7 +51,32 @@
             Cash <span>-$400</span><button class="delete-btn">x</button>
           </li> -->
         </ul>
+
+        <h3>Metamask</h3>
+        <br>
+        <div id="metamask">
+          <h4>Your Public Address:</h4>
+        <div class="metamask-container">
+          <p id='showAccount'></p>
+
+
+        </div>
+        <button class ="btn" id="metamaskButton">Connect to Metamask</button>
+        <br>
+        <h4>COT token contract address:</h4>
+        <div class="metamask-container">
+          <p>0xcad680287ee517cfae13c6956f035f07294d975d</p>
+        </div>
+        <h3>Your Balance:</h3>
+        <div class="metamask-container">
+          <h5>COT <span id='showBalance'></span></h5>
+        </div>
+        <button class ="btn" id="balanceButton">Show Token Balance</button>
+  
+      </div>
     </div>
+
+    
 
   <!-- https://www.w3schools.com/howto/howto_css_modals.asp -->
     <h3 onClick="addTransaction()">Add Transaction</h3>
@@ -152,6 +179,9 @@
 
       </ul>
     </div> -->
+
+
+
 
     <script src="script.js"></script>
     <script src="global.js"></script>

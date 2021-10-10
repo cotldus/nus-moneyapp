@@ -1,6 +1,6 @@
 # Nus-moneyapp
 
-View app at https://cotldus.github.io/nus-moneyapp-frontend/
+View app at https://cotldus.github.io/nus-moneyapp/
 
 Dummy user:
 
