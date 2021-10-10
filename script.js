@@ -19,7 +19,7 @@ const card = document.getElementById("card");
 let user_id= ""
 
 // function getUserByUID(){
-//   let querryStr = "http://localhost:3000/user/by-uid?user_id=" + uid.value;
+//   let querryStr = "https://nus-moneyapp-backend.herokuapp.com/user/by-uid?user_id=" + uid.value;
 //   $.getJSON(querryStr, function(data){
 //     console.log(data);
 //     return  x = data;
@@ -28,7 +28,7 @@ let user_id= ""
 
 
 function getUserByName(){
-  let querryStr = "http://localhost:3000/user/by-username?username=" + uid.value;
+  let querryStr = "https://nus-moneyapp-backend.herokuapp.com/user/by-username?username=" + uid.value;
 
   $.ajax({
     url: querryStr,
@@ -45,7 +45,7 @@ function getUserByName(){
 const getTransactionData = () => {
   // e.preventDefault();
   console.log(myuserdata[0].user_id);
-  let querryStr = "http://localhost:3000/transactions/by-uid?user_id=" + myuserdata[0].user_id;
+  let querryStr = "https://nus-moneyapp-backend.herokuapp.com/transactions/by-uid?user_id=" + myuserdata[0].user_id;
   // $.getJSON(querryStr, mydata);
   $.ajax({
     url: querryStr,
@@ -61,7 +61,7 @@ const getTransactionData = () => {
 };
 
 const deleteTransactionByTID = (tid) => {
-  let querryStr = "http://localhost:3000/transactions/delete/by-tid?transaction_id=" + tid;
+  let querryStr = "https://nus-moneyapp-backend.herokuapp.com/transactions/delete/by-tid?transaction_id=" + tid;
   console.log(tid)
   $.ajax({
     url: querryStr,

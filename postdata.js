@@ -38,7 +38,7 @@ function addData(postData){// pass your data in method
      console.log(postData);
      $.ajax({
              type: "POST",
-             url: "http://localhost:3000/transactions/add",
+             url: "https://nus-moneyapp-backend.herokuapp.com/transactions/add",
              data: postData,// now data come in this function
              contentType: "application/json",
              crossDomain: true,
