@@ -300,11 +300,11 @@ connectButton.addEventListener('click', () => {
 });
 
 // User submit Token Address input
-function getAddress() {
-  const tokenAddress = document.getElementById("token-address").value;
-  document.getElementById('display').innerHTML  = tokenAddress;
-  console.log("Token address: " + tokenAddress);
-}
+// function getAddress() {
+//   const tokenAddress = "0xcad680287ee517cfae13c6956f035f07294d975d";
+//   document.getElementById('display').innerHTML  = tokenAddress;
+//   console.log("Token address: " + tokenAddress);
+// }
 
 // Show Token Balance button
 balanceButton.addEventListener('click', () => {
@@ -402,7 +402,7 @@ const minABI = [
 
 
 async function getBalance(currentAccount) {
-  const tokenAddress = document.getElementById("display").innerText;
+  const tokenAddress = "0xcad680287ee517cfae13c6956f035f07294d975d";
   console.log(tokenAddress);
   const contract = new web3.eth.Contract(minABI, tokenAddress); 
   const result = await contract.methods.balanceOf(currentAccount).call(); 
@@ -417,7 +417,7 @@ async function getBalance(currentAccount) {
 
 // .symbol() error?
 async function getToken() {
-  const tokenAddress = document.getElementById("display").innerText;
+  const tokenAddress = "0xcad680287ee517cfae13c6956f035f07294d975d";
   const contract = new web3.eth.Contract(minABI, tokenAddress);
   tokenSymbol = await contract.methods.symbol().call();
   console.log("output = " + tokenSymbol);
